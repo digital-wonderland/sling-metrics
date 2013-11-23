@@ -1,0 +1,99 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+        <groupId>com.example.sling</groupId>
+        <artifactId>sling-metrics</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>cq-metrics-package</artifactId>
+	<description>CQ wrapper package</description>
+
+	<packaging>content-package</packaging>
+
+	<name>
+        CQ Wrapper Package
+    </name>
+
+	<properties>
+		<package.root>/apps/metrics</package.root>
+	</properties>
+
+    <repositories>
+        <repository>
+            <id>adobe-public-releases</id>
+            <name>Adobe Basel Public Repository</name>
+            <url>http://repo.adobe.com/nexus/content/groups/public</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>adobe-public-releases</id>
+            <name>Adobe Basel Public Repository</name>
+            <url>http://repo.adobe.com/nexus/content/groups/public</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+	<build>
+		<plugins>
+            <plugin>
+                <groupId>com.day.jcr.vault</groupId>
+                <artifactId>content-package-maven-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <filters>
+                        <filter>
+                            <root>${package.root}</root>
+                        </filter>
+                    </filters>
+                    <embeddeds>
+                        <embedded>
+                            <groupId>com.codahale.metrics</groupId>
+                            <artifactId>metrics-core</artifactId>
+                            <target>${package.root}/install</target>
+                        </embedded>
+                        <embedded>
+                            <groupId>com.codahale.metrics</groupId>
+                            <artifactId>metrics-graphite</artifactId>
+                            <target>${package.root}/install</target>
+                        </embedded>
+                    </embeddeds>
+                </configuration>
+            </plugin>
+
+            <!-- checks all xml files (within view projects) for well-formedness -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>xml-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+        <dependency>
+            <groupId>com.codahale.metrics</groupId>
+            <artifactId>metrics-core</artifactId>
+            <version>${metrics.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.codahale.metrics</groupId>
+            <artifactId>metrics-graphite</artifactId>
+            <version>${metrics.version}</version>
+        </dependency>
+	</dependencies>
+</project>

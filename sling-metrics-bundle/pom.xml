@@ -1,0 +1,78 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.example.sling</groupId>
+        <artifactId>sling-metrics</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+
+	<artifactId>sling-metrics-bundle</artifactId>
+	<description>Sling Plugin for Coda Hales Metrics</description>
+
+	<packaging>bundle</packaging>
+
+	<name>Sling Metrics</name>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.sling</groupId>
+				<artifactId>maven-sling-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-scr-plugin</artifactId>
+			</plugin>
+			<plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Import-Package>*</Import-Package>
+                    </instructions>
+                </configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+        <dependency>
+            <groupId>com.codahale.metrics</groupId>
+            <artifactId>metrics-core</artifactId>
+            <version>${metrics.version}</version>
+            <type>bundle</type>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.scr.annotations</artifactId>
+            <version>1.9.6</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.3</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.6.4</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.sling</groupId>
+            <artifactId>org.apache.sling.api</artifactId>
+            <version>2.2.4</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.compendium</artifactId>
+            <version>4.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+	</dependencies>
+</project>

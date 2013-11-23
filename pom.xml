@@ -1,0 +1,206 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example.sling</groupId>
+    <artifactId>sling-metrics</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+
+    <packaging>pom</packaging>
+
+    <name>Sling Metrics</name>
+    <description>Sling Plugin for Coda Hales Metrics</description>
+
+    <modules>
+        <module>sling-metrics-bundle</module>
+        <module>cq-metrics-package</module>
+    </modules>
+
+    <properties>
+        <cq.user>admin</cq.user>
+        <cq.password>admin</cq.password>
+        <cq.server>http://localhost:4502</cq.server>
+        <cq.workspace>crx.default</cq.workspace>
+        <package.group>Metrics</package.group>
+        <package.name>${project.artifactId}</package.name>
+        <package.root>/apps/metrics</package.root>
+        <package.install.root>${package.root}</package.install.root>
+
+        <metrics.version>3.0.1</metrics.version>
+    </properties>
+
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.6</source>
+                        <target>1.6</target>
+                    </configuration>
+                </plugin>
+                <!-- creates OSGi bundles -->
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-bundle-plugin</artifactId>
+                    <version>2.4.0</version>
+                    <extensions>true</extensions>
+                    <inherited>true</inherited>
+                    <configuration>
+                        <instructions>
+                            <Bundle-Description>${project.description}</Bundle-Description>
+                        </instructions>
+                    </configuration>
+                </plugin>
+                <!-- deploys OSGi bundles to Felix, http://sling.apache.org/site/sling.html -->
+                <plugin>
+                    <groupId>org.apache.sling</groupId>
+                    <artifactId>maven-sling-plugin</artifactId>
+                    <version>2.1.0</version>
+                    <configuration>
+                        <slingUrl>${cq.server}/crx/repository/${cq.workspace}${package.install.root}/install</slingUrl>
+                        <usePut>true</usePut>
+                        <user>${cq.user}</user>
+                        <password>${cq.password}</password>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-scr-plugin</artifactId>
+                    <version>1.14.0</version>
+                    <executions>
+                        <execution>
+                            <id>generate-scr-descriptor</id>
+                            <goals>
+                                <goal>scr</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <!-- checks all xml files (within view projects) for well-formedness -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>xml-maven-plugin</artifactId>
+                    <version>1.0</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>validate</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <validationSets>
+                            <validationSet>
+                                <dir>src/main/jcr_root</dir>
+                                <includes>
+                                    <include>**\*.xml</include>
+                                </includes>
+                            </validationSet>
+                        </validationSets>
+                    </configuration>
+                </plugin>
+                <!-- creates and deploys CRX packages, http://dev.day.com/docs/en/cq/current/core/how_to/how_to_use_the_vlttool/vlt-mavenplugin.html -->
+                <plugin>
+                    <groupId>com.day.jcr.vault</groupId>
+                    <artifactId>content-package-maven-plugin</artifactId>
+                    <version>0.0.21</version>
+                    <extensions>true</extensions>
+                    <inherited>true</inherited>
+                    <configuration>
+                        <userId>${cq.user}</userId>
+                        <password>${cq.password}</password>
+                        <workspace>${cq.workspace}</workspace>
+                        <targetURL>${cq.server}/crx/packmgr/service.jsp</targetURL>
+                        <!-- <classesDirectory>${project.build.directory}/jspc-plugin-generated</classesDirectory> -->
+                        <useProxy>false</useProxy>
+                        <failOnError>true</failOnError>
+                        <!-- the directory which is created by the resource phase (see resource
+                            section below) -->
+                        <builtContentDirectory>target/package/jcr_root</builtContentDirectory>
+                        <!-- <workDirectory>target/package</workDirectory> -->
+                        <group>${package.group}</group>
+                        <name>${package.name}</name>
+                        <!-- enrich description with build informations -->
+                        <properties>
+                            <description>${project.description} - ${build.details}</description>
+                        </properties>
+                        <embeddedTarget>${package.install.root}/install</embeddedTarget>
+                        <filters>
+                            <filter>
+                                <root>${package.root}</root>
+                            </filter>
+                        </filters>
+                        <embeddeds>
+                            <embedded>
+                                <!-- embed everything which has the same group id as this project
+                                    itself, nevertheless it only filters from the list of given dependencies. -->
+                                <groupId>${project.groupId}</groupId>
+                            </embedded>
+                        </embeddeds>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <!-- packaging needs to be explicitly defined, since content-packages
+                                normally have WAR packaging -->
+                            <id>default-package</id>
+                            <goals>
+                                <goal>package</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <profiles>
+        <profile>
+            <!-- Use this profile to install the OSGi bundle automatically, during development -->
+            <id>server-bundle-deploy</id>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.apache.sling</groupId>
+                            <artifactId>maven-sling-plugin</artifactId>
+                            <executions>
+                                <execution>
+                                    <id>install-bundle</id>
+                                    <goals>
+                                        <goal>install</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+
+        <profile>
+            <!-- Use this profile to install the CRX package automatically, during development -->
+            <id>server-package-deploy</id>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>com.day.jcr.vault</groupId>
+                            <artifactId>content-package-maven-plugin</artifactId>
+                            <executions>
+                                <execution>
+                                    <id>install-package</id>
+                                    <goals>
+                                        <goal>install</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+    </profiles>
+
+</project>
