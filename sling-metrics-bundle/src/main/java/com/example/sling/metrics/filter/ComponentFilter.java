@@ -34,18 +34,18 @@ public class ComponentFilter implements javax.servlet.Filter {
     private boolean isEnabled = false;
 
     @Activate
-    protected void activate(ComponentContext context) {
+    protected void activate(final ComponentContext context) {
         isEnabled = (Boolean) context.getProperties().get(COMPONENT_FILTER_ENABLED);
         LOG.info("ComponentFilter.isEnabled: [{}]", isEnabled);
     }
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(final FilterConfig filterConfig) throws ServletException {
         LOG.info("ComponentFilter init()");
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(final ServletRequest servletRequest, final ServletResponse servletResponse, final FilterChain filterChain) throws IOException, ServletException {
         LOG.debug("ComponentFilter doFilter()");
 
         if(isEnabled && metricService.isEnabled()) {

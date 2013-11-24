@@ -26,7 +26,7 @@ public class LogReporter {
     private Slf4jReporter reporter = null;
 
     @Activate
-    protected void activate(ComponentContext context) {
+    protected void activate(final ComponentContext context) {
         final boolean isEnabled = (Boolean) context.getProperties().get(LOG_REPORTER_ENABLED);
         LOG.info("Metrics LogReporter is enabled: [{}]", isEnabled);
 

@@ -9,7 +9,7 @@ public class MetricEvent extends Event {
     public static final String NAME = "name";
     public static final String VALUE = "value";
 
-    public MetricEvent(String topic, Dictionary properties) {
+    public MetricEvent(final String topic, final Dictionary properties) {
         super(topic, properties);
     }
 

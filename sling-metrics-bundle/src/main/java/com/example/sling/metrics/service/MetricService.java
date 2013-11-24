@@ -22,7 +22,7 @@ public class MetricService {
     private boolean isEnabled;
 
     @Activate
-    protected void activate(ComponentContext context) {
+    protected void activate(final ComponentContext context) {
         isEnabled = (Boolean) context.getProperties().get(METRIC_SERVICE_ENABLED);
         if(isEnabled) {
             registry = new MetricRegistry();
