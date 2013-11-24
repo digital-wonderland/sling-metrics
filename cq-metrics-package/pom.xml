@@ -72,6 +72,11 @@
                             <artifactId>metrics-graphite</artifactId>
                             <target>${package.root}/install</target>
                         </embedded>
+                        <embedded>
+                            <groupId>com.codahale.metrics</groupId>
+                            <artifactId>metrics-jvm</artifactId>
+                            <target>${package.root}/install</target>
+                        </embedded>
                     </embeddeds>
                 </configuration>
             </plugin>
@@ -93,6 +98,11 @@
         <dependency>
             <groupId>com.codahale.metrics</groupId>
             <artifactId>metrics-graphite</artifactId>
+            <version>${metrics.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.codahale.metrics</groupId>
+            <artifactId>metrics-jvm</artifactId>
             <version>${metrics.version}</version>
         </dependency>
 	</dependencies>
