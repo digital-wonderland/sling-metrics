@@ -37,7 +37,7 @@ public class GraphiteReporter {
     private com.codahale.metrics.graphite.GraphiteReporter reporter = null;
 
     @Activate
-    protected void activate(ComponentContext context) {
+    protected void activate(final ComponentContext context) {
         final Dictionary properties = context.getProperties();
         final boolean isEnabled = (Boolean) properties.get(GRAPHITE_REPORTER_ENABLED);
         LOG.info("Metrics LogReporter is enabled: [{}]", isEnabled);
