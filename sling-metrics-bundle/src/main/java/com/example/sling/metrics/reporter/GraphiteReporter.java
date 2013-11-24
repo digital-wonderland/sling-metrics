@@ -40,7 +40,7 @@ public class GraphiteReporter {
     protected void activate(final ComponentContext context) {
         final Dictionary properties = context.getProperties();
         final boolean isEnabled = (Boolean) properties.get(GRAPHITE_REPORTER_ENABLED);
-        LOG.info("Metrics LogReporter is enabled: [{}]", isEnabled);
+        LOG.info("Metrics GraphiteReporter is enabled: [{}]", isEnabled);
 
         if(isEnabled && metricService.isEnabled()) {
             final String hostname = (String) properties.get(GRAPHITE_REPORTER_HOST_NAME);
@@ -53,6 +53,8 @@ public class GraphiteReporter {
                     .convertDurationsTo(TimeUnit.MILLISECONDS)
                     .filter(MetricFilter.ALL)
                     .build(graphite);
+            reporter.start(1, TimeUnit.MINUTES);
+            LOG.info("Reporting metrics to Graphite @ [{}:{}] with prefix [{}]", new Object[] {hostname, port, prefix});
         }
     }
 
@@ -60,7 +62,7 @@ public class GraphiteReporter {
     protected void deactivate() {
         if(reporter != null) {
             reporter.stop();
-            LOG.info("Metrics LogReporter stopped");
+            LOG.info("Metrics GraphiteReporter stopped");
         }
     }
 
