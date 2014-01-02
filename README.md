@@ -1,4 +1,4 @@
-Sling Metrics
+Sling Metrics [![Build Status](https://api.travis-ci.org/digital-wonderland/sling-metrics.png)](https://travis-ci.org/digital-wonderland/sling-metrics)
 =============
 
 [Sling](http://sling.apache.org/) integration with Coda Hales [Metrics](http://metrics.codahale.com/).
