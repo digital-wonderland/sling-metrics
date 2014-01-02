@@ -41,11 +41,7 @@ public class MeterEventListener implements EventHandler, JobProcessor {
 
         if(metricService.isEnabled()) {
             if(StringUtils.isNotEmpty(name)) {
-                final SortedMap<String,Meter> meters = metricService.getRegistry().getMeters();
-                Meter meter = meters.get(name);
-                if(meter == null) {
-                    meter = metricService.getRegistry().meter(name);
-                }
+                final Meter meter = metricService.getRegistry().meter(name);
                 if(StringUtils.isEmpty(value)) {
                     try {
                         meter.mark(Long.parseLong(value));

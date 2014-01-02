@@ -42,16 +42,10 @@ public class CounterEventListener implements EventHandler, JobProcessor {
 
         if(metricService.isEnabled()) {
             if(StringUtils.isNotEmpty(name)) {
-                final SortedMap<String,Counter> counters = metricService.getRegistry().getCounters();
-
-                Counter counter = counters.get(name);;
-                if(counter == null) {
-                    counter = metricService.getRegistry().counter(name);
-                }
-
                 if(StringUtils.isEmpty(value)) {
                     try {
                         final long l = Long.parseLong(value);
+                        final Counter counter = metricService.getRegistry().counter(name);
                         if(0 < l) {
                             counter.inc(l);
                         } else {

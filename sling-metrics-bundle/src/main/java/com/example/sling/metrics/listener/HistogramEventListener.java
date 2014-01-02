@@ -41,11 +41,7 @@ public class HistogramEventListener implements EventHandler, JobProcessor {
 
         if(metricService.isEnabled()) {
             if(StringUtils.isNotEmpty(name)) {
-                final SortedMap<String,Histogram> histograms = metricService.getRegistry().getHistograms();
-                Histogram histogram = histograms.get(name);
-                if(histogram == null) {
-                    histogram = metricService.getRegistry().histogram(name);
-                }
+                Histogram histogram = metricService.getRegistry().histogram(name);
                 try {
                     histogram.update(Long.parseLong(value));
                 } catch(NumberFormatException e) {
