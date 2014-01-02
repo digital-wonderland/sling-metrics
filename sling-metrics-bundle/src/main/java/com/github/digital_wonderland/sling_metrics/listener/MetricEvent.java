@@ -1,4 +1,4 @@
-package com.example.sling.metrics.listener;
+package com.github.digital_wonderland.sling_metrics.listener;
 
 import org.osgi.service.event.Event;
 

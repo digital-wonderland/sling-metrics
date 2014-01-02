@@ -1,4 +1,4 @@
-package com.example.sling.metrics.service;
+package com.github.digital_wonderland.sling_metrics.service;
 
 import com.codahale.metrics.MetricRegistry;
 import org.apache.felix.scr.annotations.Activate;

@@ -1,16 +1,14 @@
-package com.example.sling.metrics.reporter;
+package com.github.digital_wonderland.sling_metrics.reporter;
 
 import com.codahale.metrics.MetricFilter;
-import com.codahale.metrics.Slf4jReporter;
 import com.codahale.metrics.graphite.Graphite;
-import com.example.sling.metrics.service.MetricService;
+import com.github.digital_wonderland.sling_metrics.service.MetricService;
 import org.apache.felix.scr.annotations.*;
 import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.InetSocketAddress;
-import java.net.URL;
 import java.util.Dictionary;
 import java.util.concurrent.TimeUnit;
 

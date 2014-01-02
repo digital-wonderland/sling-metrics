@@ -1,8 +1,7 @@
-package com.example.sling.metrics.listener;
+package com.github.digital_wonderland.sling_metrics.listener;
 
-import com.codahale.metrics.Counter;
 import com.codahale.metrics.Meter;
-import com.example.sling.metrics.service.MetricService;
+import com.github.digital_wonderland.sling_metrics.service.MetricService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Property;
@@ -16,14 +15,12 @@ import org.osgi.service.event.EventHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.SortedMap;
-
 @Component(metatype = false, immediate = true)
 @Service(value = EventHandler.class)
-@Property(name="event.topics", value = "metric/counters", propertyPrivate = true)
-public class CounterEventListener implements EventHandler, JobProcessor {
+@Property(name="event.topics", value = "metric/meters", propertyPrivate = true)
+public class MeterEventListener implements EventHandler, JobProcessor {
 
-    private static final Logger LOG = LoggerFactory.getLogger(CounterEventListener.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MeterEventListener.class);
 
     @Reference
     protected MetricService metricService;
@@ -42,20 +39,15 @@ public class CounterEventListener implements EventHandler, JobProcessor {
 
         if(metricService.isEnabled()) {
             if(StringUtils.isNotEmpty(name)) {
+                final Meter meter = metricService.getRegistry().meter(name);
                 if(StringUtils.isEmpty(value)) {
                     try {
-                        final long l = Long.parseLong(value);
-                        final Counter counter = metricService.getRegistry().counter(name);
-                        if(0 < l) {
-                            counter.inc(l);
-                        } else {
-                            counter.dec(l);
-                        }
+                        meter.mark(Long.parseLong(value));
                     } catch(NumberFormatException e) {
                         LOG.error(e.getMessage(), e);
                     }
                 } else {
-                    LOG.warn("Received counter metric event without value: [{}]", event);
+                    meter.mark();
                 }
             } else {
                 LOG.warn("Received metric event without name: [{}]", event);

@@ -1,8 +1,8 @@
-package com.example.sling.metrics.filter;
+package com.github.digital_wonderland.sling_metrics.filter;
 
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.Timer;
-import com.example.sling.metrics.service.MetricService;
+import com.github.digital_wonderland.sling_metrics.service.MetricService;
 import org.apache.felix.scr.annotations.Activate;
 import org.apache.felix.scr.annotations.Property;
 import org.apache.felix.scr.annotations.Reference;

@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.example.sling</groupId>
+    <groupId>com.github.digital-wonderland</groupId>
     <artifactId>sling-metrics</artifactId>
     <version>0.1.0-SNAPSHOT</version>
 
@@ -10,10 +10,11 @@
     <name>Sling Metrics</name>
     <description>Sling Plugin for Coda Hales Metrics</description>
 
-    <modules>
-        <module>sling-metrics-bundle</module>
-        <module>cq-metrics-package</module>
-    </modules>
+    <scm>
+        <connection>scm:git:git://github.com/digital-wonderland/sling-metrics.git</connection>
+        <developerConnection>scm:git:git@github.com:digital-wonderland/sling-metrics.git</developerConnection>
+        <url>https://github.com/digital-wonderland/sling-metrics</url>
+    </scm>
 
     <properties>
         <cq.user>admin</cq.user>
@@ -28,6 +29,10 @@
         <metrics.version>3.0.1</metrics.version>
     </properties>
 
+    <modules>
+        <module>sling-metrics-bundle</module>
+        <module>cq-metrics-package</module>
+    </modules>
 
     <build>
         <pluginManagement>

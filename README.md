@@ -15,6 +15,6 @@ org.osgi.framework.system.packages.extra=sun.misc
 License
 =======
 
-Copyright (c) 2013 Stephan Kleine
+Copyright (c) 2013-2014 Stephan Kleine
 
 Published under Apache Software License 2.0, see LICENSE
