@@ -1,24 +1,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
+    <parent>
         <groupId>com.example.sling</groupId>
         <artifactId>sling-metrics</artifactId>
         <version>0.1.0-SNAPSHOT</version>
-	</parent>
+    </parent>
 
-	<artifactId>cq-metrics-package</artifactId>
-	<description>CQ wrapper package</description>
+    <artifactId>cq-metrics-package</artifactId>
+    <description>CQ wrapper package</description>
 
-	<packaging>content-package</packaging>
+    <packaging>content-package</packaging>
 
-	<name>
-        CQ Wrapper Package
-    </name>
+    <name>CQ Wrapper Package</name>
 
-	<properties>
-		<package.root>/apps/metrics</package.root>
-	</properties>
+    <properties>
+        <package.root>/apps/metrics</package.root>
+    </properties>
 
     <repositories>
         <repository>
@@ -49,8 +47,8 @@
         </pluginRepository>
     </pluginRepositories>
 
-	<build>
-		<plugins>
+    <build>
+        <plugins>
             <plugin>
                 <groupId>com.day.jcr.vault</groupId>
                 <artifactId>content-package-maven-plugin</artifactId>
@@ -77,19 +75,24 @@
                             <artifactId>metrics-jvm</artifactId>
                             <target>${package.root}/install</target>
                         </embedded>
+                        <embedded>
+                            <groupId>com.example.sling</groupId>
+                            <artifactId>sling-metrics-bundle</artifactId>
+                            <target>${package.root}/install</target>
+                        </embedded>
                     </embeddeds>
                 </configuration>
             </plugin>
 
             <!-- checks all xml files (within view projects) for well-formedness -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>xml-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>xml-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
-	<dependencies>
+    <dependencies>
         <dependency>
             <groupId>com.codahale.metrics</groupId>
             <artifactId>metrics-core</artifactId>
@@ -110,5 +113,5 @@
             <artifactId>sling-metrics-bundle</artifactId>
             <version>${project.version}</version>
         </dependency>
-	</dependencies>
+    </dependencies>
 </project>
