@@ -105,5 +105,10 @@
             <artifactId>metrics-jvm</artifactId>
             <version>${metrics.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.example.sling</groupId>
+            <artifactId>sling-metrics-bundle</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 	</dependencies>
 </project>
