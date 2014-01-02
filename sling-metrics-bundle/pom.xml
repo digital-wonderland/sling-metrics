@@ -12,7 +12,7 @@
 
 	<packaging>bundle</packaging>
 
-	<name>Sling Metrics</name>
+	<name>Sling Metrics Bundle</name>
 
 	<build>
 		<plugins>
@@ -42,19 +42,22 @@
             <groupId>com.codahale.metrics</groupId>
             <artifactId>metrics-core</artifactId>
             <version>${metrics.version}</version>
-            <type>bundle</type>
+            <!--<type>bundle</type>-->
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.codahale.metrics</groupId>
             <artifactId>metrics-graphite</artifactId>
             <version>${metrics.version}</version>
-            <type>bundle</type>
+            <!--<type>bundle</type>-->
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.codahale.metrics</groupId>
             <artifactId>metrics-jvm</artifactId>
             <version>${metrics.version}</version>
-            <type>bundle</type>
+            <!--<type>bundle</type>-->
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.felix</groupId>
