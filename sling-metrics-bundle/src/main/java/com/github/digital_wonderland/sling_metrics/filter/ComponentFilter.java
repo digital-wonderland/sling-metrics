@@ -53,7 +53,7 @@ public class ComponentFilter implements javax.servlet.Filter {
             if(servletRequest instanceof SlingHttpServletRequest) {
                 final SlingHttpServletRequest slingRequest = (SlingHttpServletRequest) servletRequest;
                 final String resourceType = slingRequest.getResource().getResourceType();
-                final Timer.Context context = registry.timer(resourceType).time();
+                final Timer.Context context = registry.timer("components." + resourceType).time();
                 try {
                     filterChain.doFilter(servletRequest, servletResponse);
                 } finally {
