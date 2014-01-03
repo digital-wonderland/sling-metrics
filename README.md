@@ -1,7 +1,7 @@
 Sling Metrics [![Build Status](https://api.travis-ci.org/digital-wonderland/sling-metrics.png)](https://travis-ci.org/digital-wonderland/sling-metrics)
 =============
 
-[Sling](http://sling.apache.org/) integration with Coda Hales [Metrics](http://metrics.codahale.com/).
+Integration of Coda Hales [Metrics](http://metrics.codahale.com/) with [Apache Sling](http://sling.apache.org/) and [Adobe CQ](http://www.adobe.com/sea/products/cq.html).
 
 Goal
 ====
@@ -18,10 +18,16 @@ The plugin consists of two separate bundles:
 
 The ```sling-metrics-bundle``` provides the general functionality and sling specific things:
 
-* a central ```MetricRegistry``` is made available via an OSGi ```MetricService```. This registry also can be used to register custom metrics.
-* several listeners register to ```metrics/``` topics to allow creation of metrics via OSGi events (not all metrics available yet).
+* a central ```MetricRegistry``` is made available via an OSGi ```MetricService```.
+
+    This registry also can be used to register custom metrics.
+
+* several listeners register to topics prefixed with ```metric/``` to allow creation of metrics via OSGi events (not all metrics available yet).
+
 * reporters for SLF4J, Graphite & JMX get registered and can be configured via their respective OSGi configuration
-* [general JVM metrics](http://metrics.codahale.com/manual/jvm/) are made available
+
+* general [JVM metrics](http://metrics.codahale.com/manual/jvm/) are made available
+
 * Sling specific metrics (TBD)
 
 The ```cq-metrics-bundle``` can be deployed on top of that and provides CQ specific checks & metrics (TBD - e.g. replication queue health check / metrics, ...).
@@ -34,7 +40,7 @@ This way custom applications can generate whatever metrics they wish while avoid
 Graphite
 --------
 
-For ones convenience there is a [Vagrant](http://vagrantup.com) config included providing a Graphite installation at [http://localhost:8080](http://localhost:8080). The respective Carbon instance is listening to ```33.33.33.12``` port ```2003```.
+For your convenience there is a [Vagrant](http://vagrantup.com) config included providing a Graphite installation at [http://localhost:8080](http://localhost:8080). The respective Carbon instance is listening to ```33.33.33.12``` port ```2003```.
 
 The Vagrant box is based on [this CentOS Packer template](https://github.com/digital-wonderland/packer-templates/tree/master/CentOS-6-x86_64) (The box is just a minimal CentOS 6 installation so anything similar should do as well).
 
@@ -42,11 +48,15 @@ The Vagrant box is based on [this CentOS Packer template](https://github.com/dig
 Installation to CQ
 ====================
 
-The metrics plugin can be easily installed into an existing CQ installation by using the ```server-package-deploy``` profile of the ```cq-metrics-package``` submodule. The CQ instance can be specified via the ```cq.server``` property:
+The metrics plugin can be easily installed into an existing CQ installation by using the ```server-package-deploy``` profile of the ```cq-metrics-package``` submodule. The CQ instance can be specified via the ```cq.server``` property.
+
+E.g. to install to [http://localhost:4502](http://localhost:4502):
 
 ```
 mvn -f cq-metrics-package/pom.xml -Pserver-package-deploy -Dcq.server=http://localhost:4502
 ```
+
+Now the different components can be configured via their [respective OSGi configuration](localhost:4502/system/console/configMgr)
 
 Installation Pitfalls
 ---------------------
@@ -56,10 +66,11 @@ Coda Hales Metrics accesses ```sun.misc.Unsafe``` which has to be made explicite
 ```
 org.osgi.framework.system.packages.extra=sun.misc
 ```
+To make this change effective CQ has to be restarted.
 
 License
 =======
 
-Copyright (c) 2013-2014 Stephan Kleine
+Copyright &copy; 2013-2014 Stephan Kleine
 
 Published under Apache Software License 2.0, see LICENSE
