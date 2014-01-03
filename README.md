@@ -16,7 +16,10 @@ The plugin consists of two separate bundles:
 * sling-metrics-bundle (Sling/JVM/... - WIP)
 * cq-metrics-bundle (CQ specific - TBD)
 
-The ```sling-metrics-bundle``` provides the general functionality and sling specific things:
+sling-metrics-bundle
+--------------------
+
+provides the general functionality and sling specific things:
 
 * a central ```MetricRegistry``` is made available via an OSGi ```MetricService```.
 
@@ -30,7 +33,13 @@ The ```sling-metrics-bundle``` provides the general functionality and sling spec
 
 * Sling specific metrics (TBD)
 
-The ```cq-metrics-bundle``` can be deployed on top of that and provides CQ specific checks & metrics (TBD - e.g. replication queue health check / metrics, ...).
+cq-metrics-bundle
+-----------------
+
+can be deployed on top of that and provides CQ specific checks & metrics (TBD - e.g. replication queue health check / metrics, ...).
+
+3rd party applications
+----------------------
 
 By following the same approach custom metrics for additional applications can be brought in on top of that.
 
