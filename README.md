@@ -18,8 +18,8 @@ The plugin consists of two separate bundles:
 
 The ```sling-metrics-bundle``` provides the general functionality and sling specific things:
 
-* a central ```Metric Regsistry``` is made available via an OSGi ```MetricService```. This registry also can be used to register custom metrics.
-* several listeners regsiter to ```metrics/``` topics to allow creation of metrics via OSGi events (not all metrics available yet).
+* a central ```MetricRegistry``` is made available via an OSGi ```MetricService```. This registry also can be used to register custom metrics.
+* several listeners register to ```metrics/``` topics to allow creation of metrics via OSGi events (not all metrics available yet).
 * reporters for SLF4J, Graphite & JMX get registered and can be configured via their respective OSGi configuration
 * [general JVM metrics](http://metrics.codahale.com/manual/jvm/) are made available
 * Sling specific metrics (TBD)
