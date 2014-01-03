@@ -34,10 +34,10 @@ public class HistogramEventListener implements EventHandler, JobProcessor {
 
     @Override
     public boolean process(final Event event) {
-        final String name = (String) event.getProperty(MetricEvent.NAME);
-        final String value = (String) event.getProperty(MetricEvent.VALUE);
-
         if(metricService.isEnabled()) {
+            final String name = (String) event.getProperty(MetricEvent.NAME);
+            final String value = (String) event.getProperty(MetricEvent.VALUE);
+
             if(StringUtils.isNotEmpty(name)) {
                 Histogram histogram = metricService.getRegistry().histogram(name);
                 try {
@@ -49,8 +49,6 @@ public class HistogramEventListener implements EventHandler, JobProcessor {
                 LOG.warn("Received metric event without name: [{}]", event);
             }
         }
-
         return true;
     }
-
 }

@@ -49,10 +49,10 @@ public class ComponentFilter implements javax.servlet.Filter {
         LOG.debug("ComponentFilter doFilter()");
 
         if(isEnabled && metricService.isEnabled()) {
-            final MetricRegistry registry = metricService.getRegistry();
             if(servletRequest instanceof SlingHttpServletRequest) {
                 final SlingHttpServletRequest slingRequest = (SlingHttpServletRequest) servletRequest;
                 final String resourceType = slingRequest.getResource().getResourceType();
+                final MetricRegistry registry = metricService.getRegistry();
                 final Timer.Context context = registry.timer("components." + resourceType).time();
                 try {
                     filterChain.doFilter(servletRequest, servletResponse);

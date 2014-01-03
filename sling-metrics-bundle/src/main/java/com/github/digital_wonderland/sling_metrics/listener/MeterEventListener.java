@@ -34,10 +34,10 @@ public class MeterEventListener implements EventHandler, JobProcessor {
 
     @Override
     public boolean process(final Event event) {
-        final String name = (String) event.getProperty(MetricEvent.NAME);
-        final String value = (String) event.getProperty(MetricEvent.VALUE);
-
         if(metricService.isEnabled()) {
+            final String name = (String) event.getProperty(MetricEvent.NAME);
+            final String value = (String) event.getProperty(MetricEvent.VALUE);
+
             if(StringUtils.isNotEmpty(name)) {
                 final Meter meter = metricService.getRegistry().meter(name);
                 if(StringUtils.isEmpty(value)) {
@@ -53,8 +53,6 @@ public class MeterEventListener implements EventHandler, JobProcessor {
                 LOG.warn("Received metric event without name: [{}]", event);
             }
         }
-
         return true;
     }
-
 }
