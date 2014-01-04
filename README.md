@@ -65,7 +65,7 @@ E.g. to install to [http://localhost:4502](http://localhost:4502):
 mvn -f cq-metrics-package/pom.xml -Pserver-package-deploy -Dcq.server=http://localhost:4502
 ```
 
-Now the different components can be configured via their [respective OSGi configuration](localhost:4502/system/console/configMgr)
+Now the different components can be configured via their [respective OSGi configuration](http://localhost:4502/system/console/configMgr)
 
 Installation Pitfalls
 ---------------------
