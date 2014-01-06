@@ -27,9 +27,15 @@ provides the general functionality and sling specific things:
 
 * several listeners register to topics prefixed with ```metric/``` to allow creation of metrics via OSGi events (not all metrics available yet).
 
+* a central ```HealthCheckRegistry``` is made available via an OSGi ```HealthCheckService```.
+
+    This registry also can be used to register custom health checks.
+
 * reporters for SLF4J, Graphite & JMX get registered and can be configured via their respective OSGi configuration
 
 * general [JVM metrics](http://metrics.codahale.com/manual/jvm/) are made available
+
+* Sling proxies around [Metrics' servlets](http://metrics.codahale.com/manual/servlets/) (Health Check, Metrics, Ping & Thread dump)
 
 * Sling specific metrics (TBD)
 

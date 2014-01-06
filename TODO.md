@@ -1,6 +1,5 @@
 # To do:
 
-* integrate servlets from metrics library
 * identify & integrate Sling metrics / health checks
 * identify & integrate CQ metrics / health checks
 * improve config options - e.g.
