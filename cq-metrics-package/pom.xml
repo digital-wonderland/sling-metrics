@@ -76,6 +76,36 @@
                             <target>${package.root}/install</target>
                         </embedded>
                         <embedded>
+                            <groupId>com.codahale.metrics</groupId>
+                            <artifactId>metrics-servlets</artifactId>
+                            <target>${package.root}/install</target>
+                        </embedded>
+                        <embedded>
+                            <groupId>com.codahale.metrics</groupId>
+                            <artifactId>metrics-healthchecks</artifactId>
+                            <target>${package.root}/install</target>
+                        </embedded>
+                        <embedded>
+                            <groupId>com.codahale.metrics</groupId>
+                            <artifactId>metrics-json</artifactId>
+                            <target>${package.root}/install</target>
+                        </embedded>
+                        <embedded>
+                            <groupId>com.fasterxml.jackson.core</groupId>
+                            <artifactId>jackson-core</artifactId>
+                            <target>${package.root}/install</target>
+                        </embedded>
+                        <embedded>
+                            <groupId>com.fasterxml.jackson.core</groupId>
+                            <artifactId>jackson-databind</artifactId>
+                            <target>${package.root}/install</target>
+                        </embedded>
+                        <embedded>
+                            <groupId>com.fasterxml.jackson.core</groupId>
+                            <artifactId>jackson-annotations</artifactId>
+                            <target>${package.root}/install</target>
+                        </embedded>
+                        <embedded>
                             <groupId>com.github.digital-wonderland</groupId>
                             <artifactId>sling-metrics-bundle</artifactId>
                             <target>${package.root}/install</target>
@@ -109,9 +139,40 @@
             <version>${metrics.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.codahale.metrics</groupId>
+            <artifactId>metrics-servlets</artifactId>
+            <version>${metrics.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.codahale.metrics</groupId>
+            <artifactId>metrics-healthchecks</artifactId>
+            <version>${metrics.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.codahale.metrics</groupId>
+            <artifactId>metrics-json</artifactId>
+            <version>${metrics.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.github.digital-wonderland</groupId>
             <artifactId>sling-metrics-bundle</artifactId>
             <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.3.0</version>
         </dependency>
     </dependencies>
 </project>
