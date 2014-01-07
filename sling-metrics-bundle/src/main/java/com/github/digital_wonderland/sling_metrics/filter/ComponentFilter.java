@@ -36,12 +36,7 @@ public class ComponentFilter implements javax.servlet.Filter {
     @Activate
     protected void activate(final ComponentContext context) {
         isEnabled = (Boolean) context.getProperties().get(COMPONENT_FILTER_ENABLED);
-        LOG.info("ComponentFilter.isEnabled: [{}]", isEnabled);
-    }
-
-    @Override
-    public void init(final FilterConfig filterConfig) throws ServletException {
-        LOG.info("ComponentFilter init()");
+        LOG.debug("ComponentFilter.isEnabled: [{}]", isEnabled);
     }
 
     @Override
@@ -67,10 +62,5 @@ public class ComponentFilter implements javax.servlet.Filter {
 
     private String normalizeResourceType(final String resourceType) {
         return ("components." + resourceType).replaceAll("[\\./:]+", ".");
-    }
-
-    @Override
-    public void destroy() {
-        LOG.info("ComponentFilter destroy()");
     }
 }
