@@ -53,7 +53,7 @@ public class ComponentFilter implements javax.servlet.Filter {
                 final SlingHttpServletRequest slingRequest = (SlingHttpServletRequest) servletRequest;
                 final String resourceType = slingRequest.getResource().getResourceType();
                 final MetricRegistry registry = metricService.getRegistry();
-                final Timer.Context context = registry.timer("components." + resourceType).time();
+                final Timer.Context context = registry.timer(normalizeResourceType(resourceType)).time();
                 try {
                     filterChain.doFilter(servletRequest, servletResponse);
                 } finally {
@@ -63,6 +63,10 @@ public class ComponentFilter implements javax.servlet.Filter {
                 LOG.error("Metrics ComponentFilter got called for non SlingHttpServletRequest");
             }
         }
+    }
+
+    private String normalizeResourceType(final String resourceType) {
+        return ("components." + resourceType).replaceAll("[\\./:]+", ".");
     }
 
     @Override
