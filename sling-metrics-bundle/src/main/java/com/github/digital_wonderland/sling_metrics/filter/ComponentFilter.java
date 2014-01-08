@@ -28,14 +28,20 @@ public class ComponentFilter implements javax.servlet.Filter {
     @Property(label = "Enabled", boolValue = true, description = "Should the filter be enabled")
     private static final String COMPONENT_FILTER_ENABLED = "componentFilter.enabled";
 
+    @Property(label = "Component Whitelist", value = ".*", description = "Regular expression to filter events by white listing on the resource type")
+    private static final String COMPONENT_FILTER_WHITELIST= "componentFilter.whitelist";
+
     @Reference
     protected MetricService metricService;
 
     private boolean isEnabled = false;
 
+    private String whitelist = ".*";
+
     @Activate
     protected void activate(final ComponentContext context) {
         isEnabled = (Boolean) context.getProperties().get(COMPONENT_FILTER_ENABLED);
+        whitelist = (String) context.getProperties().get(COMPONENT_FILTER_WHITELIST);
         LOG.debug("ComponentFilter.isEnabled: [{}]", isEnabled);
     }
 
@@ -52,12 +58,15 @@ public class ComponentFilter implements javax.servlet.Filter {
             if(servletRequest instanceof SlingHttpServletRequest) {
                 final SlingHttpServletRequest slingRequest = (SlingHttpServletRequest) servletRequest;
                 final String resourceType = slingRequest.getResource().getResourceType();
-                final MetricRegistry registry = metricService.getRegistry();
-                final Timer.Context context = registry.timer(normalizeResourceType(resourceType)).time();
-                try {
-                    filterChain.doFilter(servletRequest, servletResponse);
-                } finally {
-                    context.stop();
+                final String metricName = normalizeResourceType(resourceType);
+                if(metricName.matches(whitelist)) {
+                    final MetricRegistry registry = metricService.getRegistry();
+                    final Timer.Context context = registry.timer(metricName).time();
+                    try {
+                        filterChain.doFilter(servletRequest, servletResponse);
+                    } finally {
+                        context.stop();
+                    }
                 }
             } else {
                 LOG.error("Metrics ComponentFilter got called for non SlingHttpServletRequest");
