@@ -11,7 +11,7 @@ public class JmxReporter {
 
     private static final Logger LOG = LoggerFactory.getLogger(JmxReporter.class);
 
-    @Property(label = "Enabled", boolValue = true, description = "Should the JMX reporter be enabled")
+    @Property(label = "Enabled", boolValue = false, description = "Should the JMX reporter be enabled")
     private static final String JMX_REPORTER_ENABLED = "jmxReporter.enabled";
 
     @Reference

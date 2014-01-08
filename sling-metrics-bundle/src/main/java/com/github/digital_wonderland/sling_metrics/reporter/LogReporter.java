@@ -14,7 +14,7 @@ public class LogReporter {
 
     private static final Logger LOG = LoggerFactory.getLogger(LogReporter.class);
 
-    @Property(label = "Enabled", boolValue = true, description = "Should the log reporter be enabled")
+    @Property(label = "Enabled", boolValue = false, description = "Should the log reporter be enabled")
     private static final String LOG_REPORTER_ENABLED = "logReporter.enabled";
 
     @Property(label = "Logger", value = "com.example.metrics", description = "The name of the logger to be used")
