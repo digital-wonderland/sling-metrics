@@ -30,7 +30,7 @@ public class HistogramEventListener implements EventHandler {
             final String value = (String) event.getProperty(MetricEvent.VALUE);
 
             if(StringUtils.isNotEmpty(name)) {
-                Histogram histogram = metricService.getRegistry().histogram(name);
+                Histogram histogram = metricService.histogram(name);
                 try {
                     histogram.update(Long.parseLong(value));
                 } catch(NumberFormatException e) {

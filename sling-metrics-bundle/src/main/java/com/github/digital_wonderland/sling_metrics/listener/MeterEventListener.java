@@ -30,7 +30,7 @@ public class MeterEventListener implements EventHandler {
             final String value = (String) event.getProperty(MetricEvent.VALUE);
 
             if(StringUtils.isNotEmpty(name)) {
-                final Meter meter = metricService.getRegistry().meter(name);
+                final Meter meter = metricService.meter(name);
                 if(StringUtils.isEmpty(value)) {
                     try {
                         meter.mark(Long.parseLong(value));

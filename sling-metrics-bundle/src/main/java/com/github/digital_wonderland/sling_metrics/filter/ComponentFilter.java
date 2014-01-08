@@ -1,6 +1,5 @@
 package com.github.digital_wonderland.sling_metrics.filter;
 
-import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.Timer;
 import com.github.digital_wonderland.sling_metrics.service.MetricService;
 import org.apache.felix.scr.annotations.Activate;
@@ -60,8 +59,7 @@ public class ComponentFilter implements javax.servlet.Filter {
                 final String resourceType = slingRequest.getResource().getResourceType();
                 final String metricName = normalizeResourceType(resourceType);
                 if(metricName.matches(whitelist)) {
-                    final MetricRegistry registry = metricService.getRegistry();
-                    final Timer.Context context = registry.timer(metricName).time();
+                    final Timer.Context context = metricService.timer(metricName).time();
                     try {
                         filterChain.doFilter(servletRequest, servletResponse);
                     } finally {

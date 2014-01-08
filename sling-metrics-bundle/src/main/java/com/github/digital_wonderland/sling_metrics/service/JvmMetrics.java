@@ -1,6 +1,5 @@
 package com.github.digital_wonderland.sling_metrics.service;
 
-import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.jvm.FileDescriptorRatioGauge;
 import com.codahale.metrics.jvm.GarbageCollectorMetricSet;
 import com.codahale.metrics.jvm.MemoryUsageGaugeSet;
@@ -35,22 +34,20 @@ public class JvmMetrics {
     protected void activate(final ComponentContext context) {
         isEnabled = (Boolean) context.getProperties().get(METRIC_SERVICE_ENABLED);
         if(metricService.isEnabled() && isEnabled) {
-            final MetricRegistry metricRegistry = metricService.getRegistry();
-            metricRegistry.register(GARBAGE_COLLECTION_METRIC_NAME, new GarbageCollectorMetricSet());
-            metricRegistry.register(MEMORY_METRIC_NAME, new MemoryUsageGaugeSet());
-            metricRegistry.register(THREAD_STATES_METRIC_NAME, new ThreadStatesGaugeSet());
-            metricRegistry.register(FILE_DESCRIPTORS_USAGE_METRIC_NAME, new FileDescriptorRatioGauge());
+            metricService.register(GARBAGE_COLLECTION_METRIC_NAME, new GarbageCollectorMetricSet());
+            metricService.register(MEMORY_METRIC_NAME, new MemoryUsageGaugeSet());
+            metricService.register(THREAD_STATES_METRIC_NAME, new ThreadStatesGaugeSet());
+            metricService.register(FILE_DESCRIPTORS_USAGE_METRIC_NAME, new FileDescriptorRatioGauge());
         }
     }
 
     @Deactivate
     protected void deactivate() {
         if(metricService.isEnabled() && isEnabled) {
-            final MetricRegistry metricRegistry = metricService.getRegistry();
-            metricRegistry.remove(GARBAGE_COLLECTION_METRIC_NAME);
-            metricRegistry.remove(MEMORY_METRIC_NAME);
-            metricRegistry.remove(THREAD_STATES_METRIC_NAME);
-            metricRegistry.remove(FILE_DESCRIPTORS_USAGE_METRIC_NAME);
+            metricService.remove(GARBAGE_COLLECTION_METRIC_NAME);
+            metricService.remove(MEMORY_METRIC_NAME);
+            metricService.remove(THREAD_STATES_METRIC_NAME);
+            metricService.remove(FILE_DESCRIPTORS_USAGE_METRIC_NAME);
         }
     }
 

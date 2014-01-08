@@ -33,7 +33,7 @@ public class CounterEventListener implements EventHandler {
                 if(StringUtils.isEmpty(value)) {
                     try {
                         final long l = Long.parseLong(value);
-                        final Counter counter = metricService.getRegistry().counter(name);
+                        final Counter counter = metricService.counter(name);
                         if(0 < l) {
                             counter.inc(l);
                         } else {
