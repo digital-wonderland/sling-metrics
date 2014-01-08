@@ -24,11 +24,11 @@ public class JcrResourceEventListener implements EventHandler {
     public void handleEvent(Event event) {
         final String topic = event.getTopic();
         if (SlingConstants.TOPIC_RESOURCE_ADDED.equals(topic)) {
-            metricService.getRegistry().meter("jcr.resource.added").mark();
+            metricService.meter("jcr.resource.added").mark();
         } else if (SlingConstants.TOPIC_RESOURCE_CHANGED.equals(topic)) {
-            metricService.getRegistry().meter("jcr.resource.changed").mark();
+            metricService.meter("jcr.resource.changed").mark();
         } else if (SlingConstants.TOPIC_RESOURCE_REMOVED.equals(topic)) {
-            metricService.getRegistry().meter("jcr.resource.removed").mark();
+            metricService.meter("jcr.resource.removed").mark();
         }
     }
 }
