@@ -37,7 +37,11 @@ provides the general functionality and sling specific things:
 
 * Sling proxies around [Metrics' servlets](http://metrics.codahale.com/manual/servlets/) (Health Check, Metrics, Ping & Thread dump)
 
-* Sling specific metrics (TBD)
+* a filter for timing requests per resource type (resource types can be filtered with a regular expressions)
+
+* Meters for resource added, changed and removed events
+
+* other Sling specific metrics (TBD)
 
 cq-metrics-bundle
 -----------------
