@@ -23,7 +23,7 @@ public class JvmMetrics {
     private static final String FILE_DESCRIPTORS_USAGE_METRIC_NAME = name(METRIC_NAME_PREFIX, "fd", "usage");
 
     @Property(label = "Enabled", boolValue = true, description = "Should JVM metrics get collected")
-    private static final String METRIC_SERVICE_ENABLED = "jvmService.enabled";
+    private static final String JVM_METRICS_ENABLED = "jvmMetrics.enabled";
 
     @Reference
     protected MetricService metricService;
@@ -32,7 +32,7 @@ public class JvmMetrics {
 
     @Activate
     protected void activate(final ComponentContext context) {
-        isEnabled = (Boolean) context.getProperties().get(METRIC_SERVICE_ENABLED);
+        isEnabled = (Boolean) context.getProperties().get(JVM_METRICS_ENABLED);
         if(metricService.isEnabled() && isEnabled) {
             metricService.register(GARBAGE_COLLECTION_METRIC_NAME, new GarbageCollectorMetricSet());
             metricService.register(MEMORY_METRIC_NAME, new MemoryUsageGaugeSet());
