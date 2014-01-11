@@ -19,34 +19,25 @@ The plugin consists of two separate bundles:
 sling-metrics-bundle
 --------------------
 
-provides the general functionality and sling specific things:
+General Sling/Metrics integration:
 
-* a central ```MetricRegistry``` is made available via an OSGi ```MetricService```.
+* central ```MetricRegistry``` available via an OSGi ```MetricService```.
+* central ```HealthCheckRegistry``` available via an OSGi ```HealthCheckService```.
+* several listeners register to topics prefixed with ```metric/``` to allow creation of metrics via OSGi events _(not all metrics available yet)_.
+* reporters for SLF4J, Graphite & JMX
+* general [JVM metrics](http://metrics.codahale.com/manual/jvm/)
+* Proxies around [Metrics' servlets](http://metrics.codahale.com/manual/servlets/) (Health Check, Metrics, Ping & Thread dump)
 
-    This registry also can be used to register custom metrics.
+Sling specific functionality:
 
-* several listeners register to topics prefixed with ```metric/``` to allow creation of metrics via OSGi events (not all metrics available yet).
-
-* a central ```HealthCheckRegistry``` is made available via an OSGi ```HealthCheckService```.
-
-    This registry also can be used to register custom health checks.
-
-* reporters for SLF4J, Graphite & JMX get registered and can be configured via their respective OSGi configuration
-
-* general [JVM metrics](http://metrics.codahale.com/manual/jvm/) are made available
-
-* Sling proxies around [Metrics' servlets](http://metrics.codahale.com/manual/servlets/) (Health Check, Metrics, Ping & Thread dump)
-
-* a filter for timing requests per resource type (resource types can be filtered with a regular expressions)
-
-* Meters for resource added, changed and removed events
-
+* component filter for timing requests per resource type (measured resource types can be filtered with a regular expressions)
+* meters for resource added, changed and removed events
 * other Sling specific metrics (TBD)
 
 cq-metrics-bundle
 -----------------
 
-can be deployed on top of that and provides CQ specific checks & metrics (TBD - e.g. replication queue health check / metrics, ...).
+can be deployed on top of that and provides CQ specific checks & metrics _(TBD - e.g. replication queue health check / metrics, ...)_.
 
 3rd party applications
 ----------------------
@@ -59,7 +50,7 @@ This way custom applications can generate whatever metrics they wish while avoid
 Graphite
 --------
 
-For your convenience there is a [Vagrant](http://vagrantup.com) config included providing a Graphite installation at [http://localhost:8080](http://localhost:8080). The respective Carbon instance is listening to ```33.33.33.12``` port ```2003```.
+For your convenience there is a [Vagrant](http://vagrantup.com) config included providing a [Graphite](http://graphite.wikidot.com) installation at [http://localhost:8080](http://localhost:8080). The respective Carbon instance is listening to ```33.33.33.12``` port ```2003```.
 
 The Vagrant box is based on [this CentOS Packer template](https://github.com/digital-wonderland/packer-templates/tree/master/CentOS-6-x86_64) (The box is just a minimal CentOS 6 installation so anything similar should do as well).
 
@@ -77,7 +68,7 @@ mvn -f cq-metrics-package/pom.xml install -Pserver-package-deploy -Dcq.server=ht
 
 Now the different components can be configured via their [respective OSGi configuration](http://localhost:4502/system/console/configMgr)
 
-Note: the ```cq-metrics-package``` also deploys the ```cq-metrics-fragment``` which exports ```sun.misc``` from ```system.bundle``` so you don't have to edit your ```sling.properties```.
+__Note:__ the ```cq-metrics-package``` also deploys the ```cq-metrics-fragment``` which exports ```sun.misc``` from ```system.bundle``` so you don't have to edit your ```sling.properties```.
 
 Installation Pitfalls
 ---------------------
