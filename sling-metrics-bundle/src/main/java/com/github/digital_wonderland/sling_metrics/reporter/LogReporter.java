@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
-@Component(name = "Metrics Log Reporter", metatype = true)
+@Component(label = "Sling Metrics :: Reporter :: Log", metatype = true)
 public class LogReporter {
 
     private static final Logger LOG = LoggerFactory.getLogger(LogReporter.class);

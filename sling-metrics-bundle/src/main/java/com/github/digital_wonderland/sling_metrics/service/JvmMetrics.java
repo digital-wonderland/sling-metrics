@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import static com.codahale.metrics.MetricRegistry.name;
 
-@Component(name = "Metrics JVM Integration", metatype = true)
+@Component(label = "Sling Metrics :: JVM Metrics", metatype = true)
 public class JvmMetrics {
 
     private static final Logger LOG = LoggerFactory.getLogger(MetricService.class);

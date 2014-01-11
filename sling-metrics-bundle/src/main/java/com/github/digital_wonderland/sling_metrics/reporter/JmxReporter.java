@@ -6,7 +6,7 @@ import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Component(name = "Metrics JMX Reporter", metatype = true)
+@Component(label = "Sling Metrics :: Reporter :: JMX", metatype = true)
 public class JmxReporter {
 
     private static final Logger LOG = LoggerFactory.getLogger(JmxReporter.class);

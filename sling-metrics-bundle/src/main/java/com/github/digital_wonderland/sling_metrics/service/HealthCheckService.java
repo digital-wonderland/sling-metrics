@@ -9,7 +9,7 @@ import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Component(name = "Health Check Service", metatype = true)
+@Component(label = "Sling Metrics :: HealthCheck Service", metatype = true)
 @Service(value = HealthCheckService.class)
 public class HealthCheckService {
 

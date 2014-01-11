@@ -12,7 +12,7 @@ import java.net.InetSocketAddress;
 import java.util.Dictionary;
 import java.util.concurrent.TimeUnit;
 
-@Component(name = "Metrics Graphite Reporter", metatype = true)
+@Component(label = "Sling Metrics :: Reporter :: Graphite", metatype = true)
 public class GraphiteReporter {
 
     private static final Logger LOG = LoggerFactory.getLogger(GraphiteReporter.class);

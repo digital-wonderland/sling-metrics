@@ -18,7 +18,7 @@ import java.io.IOException;
 @SlingFilter(scope = SlingFilterScope.COMPONENT,
         order = -10000,
         metatype = true,
-        name = "Metrics Component Filter",
+        label = "Sling Metrics :: Component Filter",
         description = "Sling Components Filter which generates Metrics for Components")
 public class ComponentFilter implements javax.servlet.Filter {
 

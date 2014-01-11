@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-@Component(name = "Metrics Service", metatype = true)
+@Component(label = "Sling Metrics :: Metric Service", metatype = true)
 @Service(value = MetricService.class)
 public class MetricService {
 
