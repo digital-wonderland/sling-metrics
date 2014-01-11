@@ -107,6 +107,11 @@
                         </embedded>
                         <embedded>
                             <groupId>com.github.digital-wonderland</groupId>
+                            <artifactId>cq-metrics-fragment</artifactId>
+                            <target>${package.root}/install</target>
+                        </embedded>
+                        <embedded>
+                            <groupId>com.github.digital-wonderland</groupId>
                             <artifactId>sling-metrics-bundle</artifactId>
                             <target>${package.root}/install</target>
                         </embedded>
@@ -156,6 +161,11 @@
         <dependency>
             <groupId>com.github.digital-wonderland</groupId>
             <artifactId>sling-metrics-bundle</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.digital-wonderland</groupId>
+            <artifactId>cq-metrics-fragment</artifactId>
             <version>${project.version}</version>
         </dependency>
 

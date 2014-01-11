@@ -1,0 +1,36 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.github.digital-wonderland</groupId>
+        <artifactId>sling-metrics</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>cq-metrics-fragment</artifactId>
+    <description>FragmentBundle to export sun.misc from system bundle.</description>
+
+    <packaging>bundle</packaging>
+
+    <name>CQ Fragment Bundle</name>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <configuration>
+                    <instructions>
+                        <Fragment-Host>
+                            system.bundle;extension:=framework
+                        </Fragment-Host>
+                        <Export-Package>
+                            sun.misc;version=0.0.0
+                        </Export-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
