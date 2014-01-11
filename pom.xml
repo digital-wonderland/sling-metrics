@@ -27,6 +27,8 @@
         <package.install.root>${package.root}</package.install.root>
 
         <metrics.version>3.0.1</metrics.version>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <modules>
