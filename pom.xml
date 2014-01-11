@@ -35,6 +35,41 @@
         <module>cq-metrics-package</module>
     </modules>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.codahale.metrics</groupId>
+                <artifactId>metrics-core</artifactId>
+                <version>${metrics.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.codahale.metrics</groupId>
+                <artifactId>metrics-graphite</artifactId>
+                <version>${metrics.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.codahale.metrics</groupId>
+                <artifactId>metrics-jvm</artifactId>
+                <version>${metrics.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.codahale.metrics</groupId>
+                <artifactId>metrics-servlets</artifactId>
+                <version>${metrics.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.codahale.metrics</groupId>
+                <artifactId>metrics-healthchecks</artifactId>
+                <version>${metrics.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.codahale.metrics</groupId>
+                <artifactId>metrics-json</artifactId>
+                <version>${metrics.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <build>
         <pluginManagement>
             <plugins>
@@ -84,29 +119,6 @@
                         </execution>
                     </executions>
                 </plugin>
-                <!-- checks all xml files (within view projects) for well-formedness -->
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>xml-maven-plugin</artifactId>
-                    <version>1.0</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>validate</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <validationSets>
-                            <validationSet>
-                                <dir>src/main/jcr_root</dir>
-                                <includes>
-                                    <include>**\*.xml</include>
-                                </includes>
-                            </validationSet>
-                        </validationSets>
-                    </configuration>
-                </plugin>
                 <!-- creates and deploys CRX packages, http://dev.day.com/docs/en/cq/current/core/how_to/how_to_use_the_vlttool/vlt-mavenplugin.html -->
                 <plugin>
                     <groupId>com.day.jcr.vault</groupId>
@@ -130,7 +142,7 @@
                         <name>${package.name}</name>
                         <!-- enrich description with build informations -->
                         <properties>
-                            <description>${project.description} - ${build.details}</description>
+                            <description>${project.description} - ${buildNumber}</description>
                         </properties>
                         <embeddedTarget>${package.install.root}/install</embeddedTarget>
                         <filters>

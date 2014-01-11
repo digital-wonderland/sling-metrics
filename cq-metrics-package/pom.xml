@@ -7,12 +7,13 @@
         <version>0.1.0-SNAPSHOT</version>
     </parent>
 
+    <groupId>com.github.digital-wonderland.sling-metrics</groupId>
     <artifactId>cq-metrics-package</artifactId>
-    <description>CQ wrapper package</description>
-
     <packaging>content-package</packaging>
 
-    <name>CQ Wrapper Package</name>
+    <name>Sling Metrics :: CQ Package</name>
+
+    <description>Sling Metrics CQ package</description>
 
     <properties>
         <package.root>/apps/metrics</package.root>
@@ -106,23 +107,30 @@
                             <target>${package.root}/install</target>
                         </embedded>
                         <embedded>
-                            <groupId>com.github.digital-wonderland</groupId>
+                            <groupId>com.github.digital-wonderland.sling-metrics</groupId>
                             <artifactId>cq-metrics-fragment</artifactId>
                             <target>${package.root}/install</target>
                         </embedded>
                         <embedded>
-                            <groupId>com.github.digital-wonderland</groupId>
+                            <groupId>com.github.digital-wonderland.sling-metrics</groupId>
                             <artifactId>sling-metrics-bundle</artifactId>
                             <target>${package.root}/install</target>
                         </embedded>
                     </embeddeds>
                 </configuration>
             </plugin>
-
-            <!-- checks all xml files (within view projects) for well-formedness -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
-                <artifactId>xml-maven-plugin</artifactId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
@@ -131,58 +139,36 @@
         <dependency>
             <groupId>com.codahale.metrics</groupId>
             <artifactId>metrics-core</artifactId>
-            <version>${metrics.version}</version>
         </dependency>
         <dependency>
             <groupId>com.codahale.metrics</groupId>
             <artifactId>metrics-graphite</artifactId>
-            <version>${metrics.version}</version>
         </dependency>
         <dependency>
             <groupId>com.codahale.metrics</groupId>
             <artifactId>metrics-jvm</artifactId>
-            <version>${metrics.version}</version>
         </dependency>
         <dependency>
             <groupId>com.codahale.metrics</groupId>
             <artifactId>metrics-servlets</artifactId>
-            <version>${metrics.version}</version>
         </dependency>
         <dependency>
             <groupId>com.codahale.metrics</groupId>
             <artifactId>metrics-healthchecks</artifactId>
-            <version>${metrics.version}</version>
         </dependency>
         <dependency>
             <groupId>com.codahale.metrics</groupId>
             <artifactId>metrics-json</artifactId>
-            <version>${metrics.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.github.digital-wonderland</groupId>
+            <groupId>com.github.digital-wonderland.sling-metrics</groupId>
             <artifactId>sling-metrics-bundle</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.github.digital-wonderland</groupId>
+            <groupId>com.github.digital-wonderland.sling-metrics</groupId>
             <artifactId>cq-metrics-fragment</artifactId>
             <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-            <version>2.3.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.3.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>2.3.0</version>
         </dependency>
     </dependencies>
 </project>

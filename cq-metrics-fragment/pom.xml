@@ -7,12 +7,13 @@
         <version>0.1.0-SNAPSHOT</version>
     </parent>
 
+    <groupId>com.github.digital-wonderland.sling-metrics</groupId>
     <artifactId>cq-metrics-fragment</artifactId>
-    <description>FragmentBundle to export sun.misc from system bundle.</description>
-
     <packaging>bundle</packaging>
 
-    <name>CQ Fragment Bundle</name>
+    <name>Sling Metrics :: CQ Fragment</name>
+
+    <description>FragmentBundle to export sun.misc from system bundle.</description>
 
     <build>
         <plugins>
