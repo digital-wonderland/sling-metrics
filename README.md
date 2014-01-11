@@ -77,6 +77,8 @@ mvn -f cq-metrics-package/pom.xml install -Pserver-package-deploy -Dcq.server=ht
 
 Now the different components can be configured via their [respective OSGi configuration](http://localhost:4502/system/console/configMgr)
 
+Note: the ```cq-metrics-package``` also deploys the ```cq-metrics-fragment``` which exports ```sun.misc``` from ```system.bundle``` so you don't have to edit your ```sling.properties```.
+
 Installation Pitfalls
 ---------------------
 
