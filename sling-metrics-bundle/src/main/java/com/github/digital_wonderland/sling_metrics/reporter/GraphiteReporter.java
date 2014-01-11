@@ -17,7 +17,7 @@ public class GraphiteReporter {
 
     private static final Logger LOG = LoggerFactory.getLogger(GraphiteReporter.class);
 
-    @Property(label = "Enabled", boolValue = false, description = "Should the log reporter be enabled")
+    @Property(label = "Enabled", boolValue = false, description = "Should the Graphite reporter be enabled")
     private static final String GRAPHITE_REPORTER_ENABLED = "graphiteReporter.enabled";
 
     @Property(label = "Hostname", value = "localhost", description = "The hostname where Graphite is running")
