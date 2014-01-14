@@ -36,9 +36,10 @@ public class MetricService {
         if(metricPrefix.isEmpty()) {
             final String tmpl = "sling.metrics.%s";
             try {
-                metricPrefix = String.format(tmpl, InetAddress.getLocalHost().getHostName());
+                String hostname = InetAddress.getLocalHost().getHostName();
                 // shorten foo.bar.example.com to foo
-                metricPrefix = metricPrefix.split("\\.")[0];
+                hostname = hostname.split("\\.")[0];
+                metricPrefix = String.format(tmpl, hostname);
             } catch (UnknownHostException e) {
                 LOG.warn("Unable to determine hostname", e);
                 try {
