@@ -54,6 +54,8 @@ For your convenience there is a [Vagrant](http://vagrantup.com) config included 
 
 The Vagrant box is based on [this CentOS Packer template](https://github.com/digital-wonderland/packer-templates/tree/master/CentOS-6-x86_64) (The box is just a minimal CentOS 6 installation so anything similar should do as well).
 
+__Note:__ If you have a close look at your Graphite dashboard while metrics start to roll in, you will notice that not all submetrics are stored immediately. This happens because by default ```MAX_CREATES_PER_MINUTE``` in ```/etc/carbon/carbon.conf``` is set to ```50``` which means that no more than 50 whisper files will be created per minute.
+
 
 Installation to CQ
 ====================
