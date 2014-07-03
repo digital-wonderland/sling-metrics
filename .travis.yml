@@ -1,5 +1,12 @@
 language: java
 
 jdk:
-  - openjdk7
-  - openjdk6
+- openjdk7
+
+after_success:
+- '[[ $TRAVIS_BRANCH == "master" ]] && { python .travis/addServer.py; mvn clean deploy --settings ~/.m2/mySettings.xml; };'
+
+env:
+  global:
+  - secure: 47YUyaBvf5tEFOGcidR93ULXDopWCO+fs6XLX1efq6TqO+Oyfd0d8LGIqlm6ME0appXRHyQCgyegu51PkHW90UTjXOBw6b31fEV/RcXigYr1NUWWWclBuXhZTFChnRpFKNIIlNmvsgungPmLAo281bwggEb1rdnxW81WRWKCJZU=
+  - secure: QyHJDMX39vYLH9rIt9qJoU9pJN0huasfSjjAdd/YOcgC1tn93HRKtBgORDSZAOPj09WEw/euUeFywMDiAZ91BSOoKsCv43a1tbSviASeGFIOr+ZnwJqQbj4oxIqkscz2kACp4rHl2SSuYzLPAER8No+1w2uaPuoGtQ78+9Hbu7Q=
